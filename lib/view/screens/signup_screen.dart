@@ -56,6 +56,16 @@ class SignupScreen extends GetView<SignupController> {
                   decoration: InputDecoration(
                     errorText: controller.emailErrorText.value,
                     hintText: "이메일을 입력해주세요",
+                    focusedErrorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xff8F00FF),
+                      ),
+                    ),
+                    errorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xff8F00FF),
+                      ),
+                    ),
                     enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey),
                     ),
@@ -72,21 +82,34 @@ class SignupScreen extends GetView<SignupController> {
               const SizedBox(
                 height: 24,
               ),
-              TextField(
-                controller: controller.pwController,
-                decoration: const InputDecoration(
-                  hintText: "비밀번호을 입력해주세요",
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xff8F00FF),
+              Obx(
+                () => TextField(
+                  controller: controller.pwController,
+                  decoration: InputDecoration(
+                    errorText: controller.pwErrorText.value,
+                    hintText: "비밀번호을 입력해주세요",
+                    focusedErrorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xff8F00FF),
+                      ),
+                    ),
+                    errorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xff8F00FF),
+                      ),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xff8F00FF),
+                      ),
                     ),
                   ),
+                  cursorColor: const Color(0xff8F00FF),
+                  obscureText: true,
                 ),
-                cursorColor: const Color(0xff8F00FF),
-                obscureText: true,
               ),
               const SizedBox(
                 height: 24,
@@ -96,16 +119,21 @@ class SignupScreen extends GetView<SignupController> {
                   controller: controller.checkPwController,
                   decoration: InputDecoration(
                     hintText: "비밀번호을 한번 더 입력해주세요",
-                    errorText: controller.checkPwErrorText.value,
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                    ),
-                    focusedBorder: const OutlineInputBorder(
+                    focusedErrorBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Color(0xff8F00FF),
                       ),
                     ),
                     errorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xff8F00FF),
+                      ),
+                    ),
+                    errorText: controller.checkPwErrorText.value,
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Color(0xff8F00FF),
                       ),
@@ -122,7 +150,9 @@ class SignupScreen extends GetView<SignupController> {
                 height: 60,
                 child: Obx(
                   () => ElevatedButton(
-                    onPressed: controller.signup,
+                    onPressed: controller.textFiledisNotEmpty.value
+                        ? controller.signup
+                        : null,
                     style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(
                           // Color(0xff8F00FF),

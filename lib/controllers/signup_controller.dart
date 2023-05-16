@@ -8,6 +8,7 @@ class SignupController extends GetxController {
   TextEditingController checkPwController = TextEditingController();
   RxBool textFiledisNotEmpty = false.obs;
   RxnString emailErrorText = RxnString(null);
+  RxnString pwErrorText = RxnString(null);
   RxnString checkPwErrorText = RxnString(null);
 
   emailValid() {
@@ -19,6 +20,16 @@ class SignupController extends GetxController {
     } else {
       return null;
     }
+  }
+
+  pwVaild() {
+    if (pwController.text.isEmpty) return null;
+    final regExp = RegExp(
+        r"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$");
+    if (!regExp.hasMatch(pwController.text)) {
+      return "최소8자, 하나 이상의 숫자, 문자, 특수문자를 넣어주세요";
+    }
+    return null;
   }
 
   checkPassword() {
@@ -43,18 +54,35 @@ class SignupController extends GetxController {
       } else {
         emailErrorText.value = null;
       }
+
       if (emailController.text.isNotEmpty &&
           pwController.text.isNotEmpty &&
-          checkPwController.text.isNotEmpty) {
+          checkPwController.text.isNotEmpty &&
+          emailValid() == null &&
+          pwVaild() == null &&
+          checkPassword() == null) {
         textFiledisNotEmpty(true);
+      } else {
+        textFiledisNotEmpty(false);
       }
     });
 
     pwController.addListener(() {
+      if (pwVaild() != null) {
+        pwErrorText(pwVaild());
+      } else {
+        pwErrorText.value = null;
+      }
+
       if (emailController.text.isNotEmpty &&
           pwController.text.isNotEmpty &&
-          checkPwController.text.isNotEmpty) {
+          checkPwController.text.isNotEmpty &&
+          emailValid() == null &&
+          pwVaild() == null &&
+          checkPassword() == null) {
         textFiledisNotEmpty(true);
+      } else {
+        textFiledisNotEmpty(false);
       }
     });
 
@@ -64,10 +92,16 @@ class SignupController extends GetxController {
       } else {
         checkPwErrorText.value = null;
       }
+
       if (emailController.text.isNotEmpty &&
           pwController.text.isNotEmpty &&
-          checkPwController.text.isNotEmpty) {
+          checkPwController.text.isNotEmpty &&
+          emailValid() == null &&
+          pwVaild() == null &&
+          checkPassword() == null) {
         textFiledisNotEmpty(true);
+      } else {
+        textFiledisNotEmpty(false);
       }
     });
   }

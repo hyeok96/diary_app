@@ -7,6 +7,7 @@ class LoginController extends GetxController {
   TextEditingController pwController = TextEditingController();
   RxBool textFiledIsNotEmpty = false.obs;
   RxnString errorText = RxnString(null);
+  RxnString pwErrorText = RxnString(null);
 
   emailValid() {
     if (emailController.text.isEmpty) return null;
@@ -19,8 +20,19 @@ class LoginController extends GetxController {
     }
   }
 
-  login() {
-    Get.find<AuthController>().login(emailController.text, pwController.text);
+  pwVaild() {
+    if (pwController.text.isEmpty) return null;
+    final regExp = RegExp(
+        r"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$");
+    if (!regExp.hasMatch(pwController.text)) {
+      return "최소8자, 하나 이상의 숫자, 문자, 특수문자를 넣어주세요";
+    }
+    return null;
+  }
+
+  login(BuildContext context) {
+    Get.find<AuthController>()
+        .login(emailController.text, pwController.text, context);
   }
 
   @override
@@ -33,14 +45,27 @@ class LoginController extends GetxController {
         errorText.value = null;
       }
 
-      if (pwController.text.isNotEmpty && emailController.text.isNotEmpty) {
+      if (pwController.text.isNotEmpty &&
+          emailController.text.isNotEmpty &&
+          emailValid() == null &&
+          pwVaild() == null) {
         textFiledIsNotEmpty(true);
       } else {
         textFiledIsNotEmpty(false);
       }
     });
+
     pwController.addListener(() {
-      if (pwController.text.isNotEmpty && emailController.text.isNotEmpty) {
+      if (pwVaild() != null) {
+        pwErrorText(pwVaild());
+      } else {
+        pwErrorText.value = null;
+      }
+
+      if (pwController.text.isNotEmpty &&
+          emailController.text.isNotEmpty &&
+          emailValid() == null &&
+          pwVaild() == null) {
         textFiledIsNotEmpty(true);
       } else {
         textFiledIsNotEmpty(false);

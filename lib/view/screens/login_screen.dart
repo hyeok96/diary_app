@@ -56,6 +56,16 @@ class LoginScreen extends GetView<LoginController> {
                   controller: controller.emailController,
                   decoration: InputDecoration(
                     hintText: "이메일을 입력해주세요",
+                    focusedErrorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xff8F00FF),
+                      ),
+                    ),
+                    errorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xff8F00FF),
+                      ),
+                    ),
                     errorText: controller.errorText.value,
                     enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey),
@@ -73,21 +83,34 @@ class LoginScreen extends GetView<LoginController> {
               const SizedBox(
                 height: 24,
               ),
-              TextField(
-                controller: controller.pwController,
-                decoration: const InputDecoration(
-                  hintText: "비밀번호를 입력해주세요",
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xff8F00FF),
+              Obx(
+                () => TextField(
+                  controller: controller.pwController,
+                  decoration: InputDecoration(
+                    hintText: "비밀번호를 입력해주세요",
+                    focusedErrorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xff8F00FF),
+                      ),
                     ),
+                    errorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xff8F00FF),
+                      ),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xff8F00FF),
+                      ),
+                    ),
+                    errorText: controller.pwErrorText.value,
                   ),
+                  cursorColor: const Color(0xff8F00FF),
+                  obscureText: true,
                 ),
-                cursorColor: const Color(0xff8F00FF),
-                obscureText: true,
               ),
               const SizedBox(
                 height: 30,
@@ -96,7 +119,9 @@ class LoginScreen extends GetView<LoginController> {
                 height: 60,
                 child: Obx(
                   () => ElevatedButton(
-                    onPressed: controller.login,
+                    onPressed: () => controller.textFiledIsNotEmpty.value
+                        ? controller.login(context)
+                        : null,
                     style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(
                         // Color(0xff8F00FF),
