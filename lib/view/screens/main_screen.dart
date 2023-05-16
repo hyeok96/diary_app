@@ -1,3 +1,4 @@
+import 'package:diary_app/services/auth_service.dart';
 import 'package:diary_app/view/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -56,10 +57,12 @@ class MainScreen extends StatelessWidget {
                     Color(0xff8F00FF),
                   ),
                 ),
-                child: const Text("로그인"),
+                child: const Text("이메일로 로그인"),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  AuthService().signInWithGoogle();
+                },
                 style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(
                     Color(0xff8F00FF),

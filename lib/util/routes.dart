@@ -1,3 +1,4 @@
+import 'package:diary_app/view/screens/home_screen.dart';
 import 'package:diary_app/view/screens/login_screen.dart';
 import 'package:diary_app/view/screens/main_screen.dart';
 import 'package:get/get.dart';
@@ -9,5 +10,6 @@ class Routes {
     GetPage(name: MainScreen().route, page: () => MainScreen()),
     GetPage(name: LoginScreen().route, page: () => LoginScreen()),
     GetPage(name: SignupScreen().route, page: () => SignupScreen()),
+    GetPage(name: HomeScreen().route, page: () => HomeScreen()),
   ];
 }
