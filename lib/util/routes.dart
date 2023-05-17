@@ -10,6 +10,6 @@ class Routes {
     GetPage(name: MainScreen().route, page: () => MainScreen()),
     GetPage(name: LoginScreen().route, page: () => LoginScreen()),
     GetPage(name: SignupScreen().route, page: () => SignupScreen()),
-    GetPage(name: HomeScreen().route, page: () => HomeScreen()),
+    GetPage(name: "/home", page: () => const HomeScreen()),
   ];
 }

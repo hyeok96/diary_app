@@ -1,4 +1,3 @@
-import 'package:diary_app/view/screens/home_screen.dart';
 import 'package:diary_app/view/screens/main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +37,7 @@ class AuthController extends GetxController {
     FirebaseAuth.instance.authStateChanges().listen((value) {
       user(value);
       if (value != null) {
-        Get.offAndToNamed(HomeScreen().route);
+        Get.offAndToNamed("/home");
       } else {
         Get.toNamed(MainScreen().route);
       }
