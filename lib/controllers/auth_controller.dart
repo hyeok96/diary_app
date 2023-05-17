@@ -31,6 +31,10 @@ class AuthController extends GetxController {
     }
   }
 
+  logout() {
+    FirebaseAuth.instance.signOut();
+  }
+
   @override
   void onInit() {
     super.onInit();

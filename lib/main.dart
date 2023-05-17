@@ -1,5 +1,6 @@
 import 'package:diary_app/controllers/auth_controller.dart';
 import 'package:diary_app/controllers/login_controller.dart';
+import 'package:diary_app/controllers/setting_controller.dart';
 import 'package:diary_app/util/routes.dart';
 import 'package:diary_app/view/screens/main_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,6 +32,10 @@ class MyApp extends StatelessWidget {
         );
         Get.lazyPut(
           () => SignupController(),
+          fenix: true,
+        );
+        Get.lazyPut(
+          () => SettingController(),
           fenix: true,
         );
       }),
