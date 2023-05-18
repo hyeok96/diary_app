@@ -4,21 +4,29 @@ class profileCard extends StatelessWidget {
   const profileCard({
     super.key,
     required this.onTapLogout,
+    required this.email,
+    this.profileUrl,
   });
 
   final Function onTapLogout;
+  final String email;
+  final String? profileUrl;
 
   @override
   Widget build(BuildContext context) {
+    print(profileUrl);
+
     return Row(
       children: [
         Stack(
           clipBehavior: Clip.none,
-          children: const [
+          children: [
             CircleAvatar(
               radius: 50,
+              backgroundImage:
+                  profileUrl != null ? NetworkImage(profileUrl!) : null,
             ),
-            Positioned(
+            const Positioned(
               bottom: 0,
               right: -1,
               child: CircleAvatar(
@@ -41,15 +49,15 @@ class profileCard extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "aa",
-              style: TextStyle(
+            Text(
+              email.split("@")[0],
+              style: const TextStyle(
                 fontSize: 20,
               ),
             ),
-            const Text(
-              "aa",
-              style: TextStyle(fontSize: 15, color: Colors.grey),
+            Text(
+              email,
+              style: const TextStyle(fontSize: 15, color: Colors.grey),
             ),
             const SizedBox(
               height: 10,
