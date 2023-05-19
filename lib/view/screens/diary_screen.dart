@@ -12,27 +12,41 @@ class DiaryScreen extends GetView<DiaryController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 40,
-          horizontal: 28,
+        padding: const EdgeInsets.only(
+          right: 28,
+          left: 28,
+          top: 40,
         ),
         child: Column(
           children: [
-            Obx(
-              () => ListView.separated(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return const DiaryTile();
-                  },
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(
-                      height: 18,
-                    );
-                  },
-                  itemCount: controller.diaryList.value!.length),
-            ),
+            controller.diaryList.value != null
+                ? Expanded(
+                    child: Obx(
+                      () => ListView.separated(
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return DiaryTile(
+                            uid:
+                                "${int.parse(controller.diaryList.value![index].uid)}",
+                            lastDiary: controller.lastUid.value ==
+                                controller.diaryList.value![index].uid,
+                            title: controller.diaryList.value![index].title,
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            height: 14,
+                          );
+                        },
+                        itemCount: controller.diaryList.value!.length,
+                      ),
+                    ),
+                  )
+                : const SizedBox(
+                    height: 0,
+                  ),
             const SizedBox(
-              height: 18,
+              height: 20,
             ),
             DottedBorder(
               borderType: BorderType.RRect,
@@ -45,24 +59,29 @@ class DiaryScreen extends GetView<DiaryController> {
                   vertical: 14,
                   horizontal: 12,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.add,
-                      color: Color(0xff8F00FF),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "다이어리 생성하기",
-                      style: TextStyle(
+                child: GestureDetector(
+                  onTap: () => controller.createDiary(
+                    controller.diaryList.value!.length.toString(),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.add,
                         color: Color(0xff8F00FF),
-                        fontSize: 20,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "다이어리 생성하기",
+                        style: TextStyle(
+                          color: Color(0xff8F00FF),
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

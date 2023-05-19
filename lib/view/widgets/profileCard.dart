@@ -14,8 +14,6 @@ class profileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(profileUrl);
-
     return Row(
       children: [
         Stack(
