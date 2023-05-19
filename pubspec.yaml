@@ -43,6 +43,7 @@ dependencies:
   get: ^4.6.5
   google_sign_in: ^6.1.0
   firebase_storage: ^11.2.1
+  dotted_border: ^2.0.0+3
 
 dev_dependencies:
   flutter_test:

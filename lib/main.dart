@@ -1,4 +1,5 @@
 import 'package:diary_app/controllers/auth_controller.dart';
+import 'package:diary_app/controllers/diary_controller.dart';
 import 'package:diary_app/controllers/login_controller.dart';
 import 'package:diary_app/controllers/setting_controller.dart';
 import 'package:diary_app/util/routes.dart';
@@ -36,6 +37,10 @@ class MyApp extends StatelessWidget {
         );
         Get.lazyPut(
           () => SettingController(),
+          fenix: true,
+        );
+        Get.lazyPut(
+          () => DiaryController(),
           fenix: true,
         );
       }),

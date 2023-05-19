@@ -1,17 +1,9 @@
-import 'package:diary_app/models/note_model.dart';
-
 class DiaryModel {
-  List<NoteModel> notes;
+  int uid;
 
-  DiaryModel({required this.notes});
+  DiaryModel({required this.uid});
 
   factory DiaryModel.fromMap(Map<String, dynamic> map) {
-    return DiaryModel(
-      notes: List<NoteModel>.from(
-        map["notes"].map(
-          (e) => NoteModel.fromMap(e),
-        ),
-      ),
-    );
+    return DiaryModel(uid: map["uid"]);
   }
 }
